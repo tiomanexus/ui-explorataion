@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { Button, buttonVariants, Dropdown, Link } from "@heroui/react";
+import { RiMoonLine, RiSunLine } from "@remixicon/react";
 import { DEVICE_PRESETS } from "./device-presets";
 
 export interface FlowLink {
@@ -31,6 +33,8 @@ export function PrototypeChrome({
 }: PrototypeChromeProps) {
   const [deviceId, setDeviceId] = useState(DEVICE_PRESETS[0]!.id);
   const [isToolbarOpen, setIsToolbarOpen] = useState(true);
+  // Scoped to the prototype content only — the toolbar chrome itself always stays light.
+  const [isWorkspaceDarkMode, setIsWorkspaceDarkMode] = useState(false);
   const device = DEVICE_PRESETS.find((d) => d.id === deviceId) ?? DEVICE_PRESETS[0]!;
   const isFixedSize = device.width !== null && device.height !== null;
 
@@ -39,62 +43,89 @@ export function PrototypeChrome({
       {isToolbarOpen ? (
         <header className="sticky top-0 z-50 flex items-center justify-between gap-2 border-b border-border bg-white px-4 py-2">
           <div className="flex items-center gap-2">
-            <a
+            <Link
               href={backHref}
               aria-label="Back to flow list"
-              className="flex items-center gap-1 rounded-md border border-border px-2 py-1 text-sm text-foreground hover:bg-surface-secondary"
+              className={buttonVariants({ variant: "outline", size: "sm" })}
             >
               ← Flows
-            </a>
+            </Link>
 
-            <select
-              aria-label="Select flow"
-              className="rounded-md border border-border bg-field px-2 py-1 text-sm text-field-foreground"
-              value={currentFlowSlug}
-              onChange={(e) => {
-                const flow = flows.find((f) => f.slug === e.target.value);
-                if (flow) window.location.href = flow.href;
-              }}
-            >
-              {flows.map((flow) => (
-                <option key={flow.slug} value={flow.slug}>
-                  {flow.name}
-                </option>
-              ))}
-            </select>
+            <Dropdown>
+              <Dropdown.Trigger
+                aria-label="Select flow"
+                className={buttonVariants({ variant: "outline", size: "sm" })}
+              >
+                {flows.find((f) => f.slug === currentFlowSlug)?.name ?? "Select flow"}
+              </Dropdown.Trigger>
+              <Dropdown.Popover>
+                <Dropdown.Menu
+                  disallowEmptySelection
+                  selectionMode="single"
+                  selectedKeys={currentFlowSlug ? [currentFlowSlug] : []}
+                  onAction={(key) => {
+                    const flow = flows.find((f) => f.slug === key);
+                    if (flow) window.location.href = flow.href;
+                  }}
+                >
+                  {flows.map((flow) => (
+                    <Dropdown.Item key={flow.slug} id={flow.slug}>
+                      {flow.name}
+                    </Dropdown.Item>
+                  ))}
+                </Dropdown.Menu>
+              </Dropdown.Popover>
+            </Dropdown>
 
-            <select
-              aria-label="Select device preview size"
-              className="rounded-md border border-border bg-field px-2 py-1 text-sm text-field-foreground"
-              value={deviceId}
-              onChange={(e) => setDeviceId(e.target.value)}
+            <Dropdown>
+              <Dropdown.Trigger
+                aria-label="Select device preview size"
+                className={buttonVariants({ variant: "outline", size: "sm" })}
+              >
+                {device.label}
+              </Dropdown.Trigger>
+              <Dropdown.Popover>
+                <Dropdown.Menu
+                  disallowEmptySelection
+                  selectionMode="single"
+                  selectedKeys={[deviceId]}
+                  onAction={(key) => setDeviceId(String(key))}
+                >
+                  {DEVICE_PRESETS.map((preset) => (
+                    <Dropdown.Item key={preset.id} id={preset.id}>
+                      {preset.label}
+                    </Dropdown.Item>
+                  ))}
+                </Dropdown.Menu>
+              </Dropdown.Popover>
+            </Dropdown>
+
+            <Button
+              isIconOnly
+              aria-label={isWorkspaceDarkMode ? "Switch workspace to light mode" : "Switch workspace to dark mode"}
+              variant="outline"
+              size="sm"
+              onPress={() => setIsWorkspaceDarkMode((v) => !v)}
             >
-              {DEVICE_PRESETS.map((preset) => (
-                <option key={preset.id} value={preset.id}>
-                  {preset.label}
-                </option>
-              ))}
-            </select>
+              {isWorkspaceDarkMode ? <RiSunLine size={16} /> : <RiMoonLine size={16} />}
+            </Button>
           </div>
 
-          <button
-            type="button"
-            onClick={() => setIsToolbarOpen(false)}
-            className="rounded-md border border-border bg-white px-2 py-1 text-sm text-foreground hover:bg-surface-secondary"
-          >
+          <Button variant="outline" size="sm" onPress={() => setIsToolbarOpen(false)}>
             Hide toolbar
-          </button>
+          </Button>
         </header>
       ) : (
         // Removed from flow (not just visually hidden) so the prototype area
         // below expands to fill the freed-up space instead of leaving a gap.
-        <button
-          type="button"
-          onClick={() => setIsToolbarOpen(true)}
-          className="fixed top-4 right-4 z-50 rounded-md border border-border bg-white px-2 py-1 text-sm text-foreground shadow-surface hover:bg-surface-secondary"
+        <Button
+          variant="outline"
+          size="sm"
+          className="fixed top-2 right-4 z-50 bg-white"
+          onPress={() => setIsToolbarOpen(true)}
         >
           Show toolbar
-        </button>
+        </Button>
       )}
 
       <div
@@ -112,13 +143,21 @@ export function PrototypeChrome({
       >
         {isFixedSize ? (
           <div
-            className="shrink-0 overflow-auto rounded-lg border border-border bg-white shadow-overlay"
+            className={`shrink-0 overflow-auto rounded-lg border border-border shadow-overlay ${
+              isWorkspaceDarkMode ? "dark bg-background text-foreground" : "bg-white"
+            }`}
             style={{ width: `${device.width}px`, height: `${device.height}px` }}
           >
             {children}
           </div>
         ) : (
-          <div className="h-full w-full overflow-auto bg-white">{children}</div>
+          <div
+            className={`h-full w-full overflow-auto ${
+              isWorkspaceDarkMode ? "dark bg-background text-foreground" : "bg-white"
+            }`}
+          >
+            {children}
+          </div>
         )}
       </div>
     </div>

@@ -11,10 +11,11 @@
   },
   "dependencies": {
     "@heroui/react": "^3.2.4",
-    "@mnx/design-tokens": "workspace:*",
-    "@mnx/ui": "workspace:*",
-    "@mnx/toolbar": "workspace:*",
     "@mnx/data-client": "workspace:*",
+    "@mnx/design-tokens": "workspace:*",
+    "@mnx/toolbar": "workspace:*",
+    "@mnx/ui": "workspace:*",
+    "@remixicon/react": "^4.9.0",
     "next": "^16.3.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

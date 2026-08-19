@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@heroui/react": "^3.2.4",
+    "@remixicon/react": "^4.9.0",
     "tailwind-variants": "^1.0.0"
   },
   "peerDependencies": {
