@@ -1,0 +1,21 @@
+/*
+ * Brand overrides on top of @heroui/styles' default theme variables
+ * (see @heroui/styles/dist/themes/default/variables.css and shared/theme.css).
+ * hover/soft accent variants derive automatically from --accent via color-mix,
+ * so overriding --accent/--accent-foreground here is enough to repaint them.
+ */
+:root,
+.light,
+.default,
+[data-theme="light"],
+[data-theme="default"] {
+  --accent: oklch(28.2% 0.020 230.2);
+  --accent-foreground: var(--snow);
+
+  /* Subtle radius scale: sm 4px / md 6px / lg 8px / xl 12px */
+  --radius: 0.5rem;
+}
+
+@theme inline {
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+}

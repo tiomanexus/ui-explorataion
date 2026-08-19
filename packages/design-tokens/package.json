@@ -1,0 +1,10 @@
+{
+  "name": "@mnx/design-tokens",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./src/tokens.ts",
+  "exports": {
+    ".": "./src/tokens.ts",
+    "./css": "./src/tokens.css"
+  }
+}

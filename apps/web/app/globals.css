@@ -1,0 +1,11 @@
+@import "@heroui/styles";
+@import "@mnx/design-tokens/css";
+
+/*
+ * Tailwind v4's automatic content scanning stops at this app's own
+ * package.json boundary — it won't see class names used inside sibling
+ * monorepo packages. Register them explicitly so those utilities compile.
+ */
+@source "../../../packages/ui/src/**/*.{ts,tsx}";
+@source "../../../packages/toolbar/src/**/*.{ts,tsx}";
+@source "../../../packages/data-client/src/**/*.{ts,tsx}";
