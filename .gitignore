@@ -3,6 +3,7 @@ node_modules
 .turbo
 dist
 storybook-static
+.conductor/
 .env
 .env.local
 .DS_Store
