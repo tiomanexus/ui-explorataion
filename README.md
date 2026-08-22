@@ -12,7 +12,7 @@ apps/web/                  Next.js app — all prototype flows live here
   data/<slug>/             Dummy data fixtures
 
 packages/design-tokens/    Brand tokens (color, radius, font) — single source of truth
-packages/ui/               shadcn/ui primitives + fully custom components (@ynvrs/ui)
+packages/ui/               shadcn/ui primitives + custom components (@ynvrs/ui), with Storybook
 packages/toolbar/          Floating viewer toolbar (device preview + flow switcher)
 packages/data-client/      Dummy ⇄ API data-source switch (useFlowData)
 ```
@@ -44,20 +44,13 @@ All brand tokens live in `packages/design-tokens/src/tokens.css`, applied once v
 token change (color, radius, font) propagates to every flow — there is no per-flow
 override path, by design.
 
-## Using this as a template for a new project
-
-This repo is meant to be forked without carrying its flows along:
-
-1. Use GitHub's "Use this template" (or `git clone` + reset the remote).
-2. Delete `apps/web/app/(flows)/*` and `apps/web/data/*`, and empty `flows/registry.ts`.
-3. Everything else — `packages/*`, routing, toolbar, data-client — is the reusable foundation.
-
 ## Dev tools
 
 - **Agentation** (`apps/web/app/agentation-dev-tool.tsx`) — dev-only visual annotation
   toolbar for talking to AI agents about UI changes. Never rendered in production.
 - **Vercel Comments** — enable in the Vercel project's Toolbar settings; no code needed.
   It's separate from Agentation and only relevant once deployed.
+- **Storybook** (`packages/ui`) — component playground for every `@ynvrs/ui` primitive.
 
 ## Deploy
 

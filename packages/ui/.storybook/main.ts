@@ -10,6 +10,11 @@ const config: StorybookConfig = {
   },
   viteFinal: async (config) => {
     config.plugins?.push(tailwindcss());
+    config.esbuild = {
+      ...config.esbuild,
+      jsx: "automatic",
+      jsxImportSource: "react",
+    };
     return config;
   },
 };

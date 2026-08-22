@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { toast } from "sonner";
 import { Button } from "../components/button";
 import { Toaster } from "../components/sonner";
 
@@ -14,14 +15,11 @@ export const Overview: StoryObj = {
     <>
       <Toaster />
       <div className="flex gap-3">
-        <Button
-          onClick={() =>
-            window.dispatchEvent(
-              new CustomEvent("toast", { detail: { title: "Custom sonner configured" } }),
-            )
-          }
-        >
+        <Button onClick={() => toast("Custom sonner configured")}>
           Trigger
+        </Button>
+        <Button variant="destructive" onClick={() => toast.error("Something went wrong")}>
+          Show error
         </Button>
       </div>
     </>
