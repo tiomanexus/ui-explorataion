@@ -48,7 +48,7 @@ export function PrototypeChrome({
   return (
     <div className="relative flex h-dvh flex-col">
       {isToolbarOpen ? (
-        <header className="sticky top-0 z-50 flex items-center justify-between gap-2 border-b border-border bg-white px-4 py-2">
+        <header className="sticky top-0 z-50 flex items-center justify-between gap-2 border-b border-border bg-background px-4 py-2">
           <div className="flex items-center gap-2">
             <a
               href={backHref}
@@ -113,7 +113,7 @@ export function PrototypeChrome({
         <Button
           variant="outline"
           size="sm"
-          className="fixed top-2 right-4 z-50 bg-white"
+          className="fixed top-2 right-4 z-50 bg-background"
           onClick={() => setIsToolbarOpen(true)}
         >
           Show toolbar
@@ -123,8 +123,8 @@ export function PrototypeChrome({
       <div
         className={
           isFixedSize
-            ? "flex flex-1 overflow-auto bg-zinc-200 p-6"
-            : "flex flex-1 overflow-auto bg-zinc-200"
+            ? "flex flex-1 overflow-auto bg-muted p-6"
+            : "flex flex-1 overflow-auto bg-muted"
         }
         // "safe center" (inline style — Tailwind's items-[safe_center]
         // arbitrary syntax doesn't compile for this property): centers the
@@ -136,7 +136,7 @@ export function PrototypeChrome({
         {isFixedSize ? (
           <div
             className={`shrink-0 overflow-auto rounded-lg border border-border shadow-overlay ${
-              isWorkspaceDarkMode ? "dark bg-background text-foreground" : "bg-white"
+              isWorkspaceDarkMode ? "dark bg-background text-foreground" : "bg-background"
             }`}
             style={{ width: `${device.width}px`, height: `${device.height}px` }}
           >
@@ -145,7 +145,7 @@ export function PrototypeChrome({
         ) : (
           <div
             className={`h-full w-full overflow-auto ${
-              isWorkspaceDarkMode ? "dark bg-background text-foreground" : "bg-white"
+              isWorkspaceDarkMode ? "dark bg-background text-foreground" : "bg-background"
             }`}
           >
             {children}
