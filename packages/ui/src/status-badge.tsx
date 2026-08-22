@@ -1,25 +1,25 @@
-import { tv, type VariantProps } from "tailwind-variants";
+import * as React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
 
-/**
- * Example of a fully custom component with no HeroUI base — built with the
- * same primitives (tv, semantic color tokens, radius scale) so it stays
- * visually and behaviorally consistent with HeroUI components.
- */
-const statusBadge = tv({
-  base: "inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium",
-  variants: {
-    status: {
-      neutral: "bg-default text-default-foreground",
-      info: "bg-accent-soft text-accent-soft-foreground",
-      success: "bg-success-soft text-success-soft-foreground",
-      warning: "bg-warning-soft text-warning-soft-foreground",
-      danger: "bg-danger-soft text-danger-soft-foreground",
+import { cn } from "./lib/utils";
+
+const statusBadge = cva(
+  "inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium",
+  {
+    variants: {
+      status: {
+        neutral: "bg-muted text-muted-foreground",
+        info: "bg-primary/10 text-primary",
+        success: "bg-success/15 text-success",
+        warning: "bg-warning/15 text-warning",
+        danger: "bg-destructive/15 text-destructive",
+      },
+    },
+    defaultVariants: {
+      status: "neutral",
     },
   },
-  defaultVariants: {
-    status: "neutral",
-  },
-});
+);
 
 export type StatusBadgeVariants = VariantProps<typeof statusBadge>;
 
@@ -29,5 +29,5 @@ export interface StatusBadgeProps extends StatusBadgeVariants {
 }
 
 export function StatusBadge({ status, className, children }: StatusBadgeProps) {
-  return <span className={statusBadge({ status, className })}>{children}</span>;
+  return <span className={cn(statusBadge({ status }), className)}>{children}</span>;
 }

@@ -1,5 +1,5 @@
 {
-  "name": "@mnx/design-tokens",
+  "name": "@ynvrs/design-tokens",
   "version": "0.0.0",
   "private": true,
   "main": "./src/tokens.ts",

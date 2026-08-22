@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { PrototypeChrome } from "@mnx/toolbar";
+import { PrototypeChrome } from "@ynvrs/toolbar";
 import { flowRegistry } from "@/flows/registry";
 
 export default function FlowsLayout({ children }: { children: React.ReactNode }) {

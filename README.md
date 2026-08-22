@@ -1,7 +1,7 @@
 # mnx-dsgn-test
 
 Design-system-driven prototyping workspace: build flows fast on top of a shared
-HeroUI-based design system, present them to stakeholders on Vercel.
+shadcn/ui-based design system, present them to stakeholders on Vercel.
 
 ## Structure
 
@@ -12,7 +12,7 @@ apps/web/                  Next.js app — all prototype flows live here
   data/<slug>/             Dummy data fixtures
 
 packages/design-tokens/    Brand tokens (color, radius, font) — single source of truth
-packages/ui/               HeroUI re-export + fully custom components (@mnx/ui)
+packages/ui/               shadcn/ui primitives + fully custom components (@ynvrs/ui)
 packages/toolbar/          Floating viewer toolbar (device preview + flow switcher)
 packages/data-client/      Dummy ⇄ API data-source switch (useFlowData)
 ```
@@ -27,7 +27,7 @@ The flow automatically shows up on the landing page and in the toolbar's flow sw
 
 ## Data: dummy vs API
 
-Every flow reads data through `useFlowData` from `@mnx/data-client`:
+Every flow reads data through `useFlowData` from `@ynvrs/data-client`:
 
 ```ts
 useFlowData({ mode: "dummy", data: someFixture });
