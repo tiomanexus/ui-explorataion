@@ -1,7 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Button, buttonVariants, Dropdown, Link } from "@heroui/react";
+import {
+  Button,
+  buttonVariants,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@ynvrs/ui";
 import { RiMoonLine, RiSunLine } from "@remixicon/react";
 import { DEVICE_PRESETS } from "./device-presets";
 
@@ -43,75 +50,60 @@ export function PrototypeChrome({
       {isToolbarOpen ? (
         <header className="sticky top-0 z-50 flex items-center justify-between gap-2 border-b border-border bg-white px-4 py-2">
           <div className="flex items-center gap-2">
-            <Link
+            <a
               href={backHref}
               aria-label="Back to flow list"
               className={buttonVariants({ variant: "outline", size: "sm" })}
             >
               ← Flows
-            </Link>
+            </a>
 
-            <Dropdown>
-              <Dropdown.Trigger
-                aria-label="Select flow"
-                className={buttonVariants({ variant: "outline", size: "sm" })}
-              >
-                {flows.find((f) => f.slug === currentFlowSlug)?.name ?? "Select flow"}
-              </Dropdown.Trigger>
-              <Dropdown.Popover>
-                <Dropdown.Menu
-                  disallowEmptySelection
-                  selectionMode="single"
-                  selectedKeys={currentFlowSlug ? [currentFlowSlug] : []}
-                  onAction={(key) => {
-                    const flow = flows.find((f) => f.slug === key);
-                    if (flow) window.location.href = flow.href;
-                  }}
-                >
-                  {flows.map((flow) => (
-                    <Dropdown.Item key={flow.slug} id={flow.slug}>
-                      {flow.name}
-                    </Dropdown.Item>
-                  ))}
-                </Dropdown.Menu>
-              </Dropdown.Popover>
-            </Dropdown>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm" aria-label="Select flow">
+                  {flows.find((f) => f.slug === currentFlowSlug)?.name ?? "Select flow"}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start">
+                {flows.map((flow) => (
+                  <DropdownMenuItem
+                    key={flow.slug}
+                    onSelect={() => {
+                      window.location.href = flow.href;
+                    }}
+                  >
+                    {flow.name}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
 
-            <Dropdown>
-              <Dropdown.Trigger
-                aria-label="Select device preview size"
-                className={buttonVariants({ variant: "outline", size: "sm" })}
-              >
-                {device.label}
-              </Dropdown.Trigger>
-              <Dropdown.Popover>
-                <Dropdown.Menu
-                  disallowEmptySelection
-                  selectionMode="single"
-                  selectedKeys={[deviceId]}
-                  onAction={(key) => setDeviceId(String(key))}
-                >
-                  {DEVICE_PRESETS.map((preset) => (
-                    <Dropdown.Item key={preset.id} id={preset.id}>
-                      {preset.label}
-                    </Dropdown.Item>
-                  ))}
-                </Dropdown.Menu>
-              </Dropdown.Popover>
-            </Dropdown>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm" aria-label="Select device preview size">
+                  {device.label}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start">
+                {DEVICE_PRESETS.map((preset) => (
+                  <DropdownMenuItem key={preset.id} onSelect={() => setDeviceId(preset.id)}>
+                    {preset.label}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
 
             <Button
-              isIconOnly
+              size="icon-sm"
               aria-label={isWorkspaceDarkMode ? "Switch workspace to light mode" : "Switch workspace to dark mode"}
               variant="outline"
-              size="sm"
-              onPress={() => setIsWorkspaceDarkMode((v) => !v)}
+              onClick={() => setIsWorkspaceDarkMode((v) => !v)}
             >
               {isWorkspaceDarkMode ? <RiSunLine size={16} /> : <RiMoonLine size={16} />}
             </Button>
           </div>
 
-          <Button variant="outline" size="sm" onPress={() => setIsToolbarOpen(false)}>
+          <Button variant="outline" size="sm" onClick={() => setIsToolbarOpen(false)}>
             Hide toolbar
           </Button>
         </header>
@@ -122,7 +114,7 @@ export function PrototypeChrome({
           variant="outline"
           size="sm"
           className="fixed top-2 right-4 z-50 bg-white"
-          onPress={() => setIsToolbarOpen(true)}
+          onClick={() => setIsToolbarOpen(true)}
         >
           Show toolbar
         </Button>

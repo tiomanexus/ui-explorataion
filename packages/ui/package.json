@@ -1,23 +1,57 @@
 {
-  "name": "@mnx/ui",
+  "name": "@ynvrs/ui",
   "version": "0.0.0",
   "private": true,
   "main": "./src/index.ts",
   "exports": {
     ".": "./src/index.ts"
   },
+  "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "typecheck": "tsc --noEmit"
+  },
   "dependencies": {
-    "@heroui/react": "^3.2.4",
+    "@hookform/resolvers": "^5.9.1",
+    "@radix-ui/react-dropdown-menu": "^2.1.24",
+    "@radix-ui/react-slot": "^1.3.3",
     "@remixicon/react": "^4.9.0",
-    "tailwind-variants": "^1.0.0"
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "cmdk": "^1.1.1",
+    "date-fns": "^4.4.0",
+    "embla-carousel-react": "^8.6.0",
+    "input-otp": "^1.5.0",
+    "lucide-react": "^1.33.0",
+    "next-themes": "^0.4.6",
+    "radix-ui": "^1.6.7",
+    "react-day-picker": "^10.0.1",
+    "react-hook-form": "^7.85.0",
+    "react-resizable-panels": "^4.12.3",
+    "recharts": "3.8.0",
+    "sonner": "^2.0.8",
+    "tailwind-merge": "^2.6.0",
+    "vaul": "^1.1.2",
+    "zod": "^4.4.3"
   },
   "peerDependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@ynvrs/design-tokens": "workspace:*",
+    "@storybook/addon-essentials": "^8.6.0",
+    "@storybook/addon-interactions": "^8.6.0",
+    "@storybook/react": "^8.6.18",
+    "@storybook/react-vite": "^8.6.0",
+    "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "typescript": "^5.7.0"
+    "@vitejs/plugin-react": "^4.3.4",
+    "storybook": "^8.6.0",
+    "tailwindcss": "^4.3.3",
+    "tw-animate-css": "^1.2.0",
+    "typescript": "^5.7.0",
+    "vite": "^6.0.0"
   }
 }

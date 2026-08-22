@@ -1,7 +1,7 @@
 "use client";
 
-import { Button, Card, StatusBadge } from "@mnx/ui";
-import { useFlowData } from "@mnx/data-client";
+import { Button, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, StatusBadge } from "@ynvrs/ui";
+import { useFlowData } from "@ynvrs/data-client";
 import { onboardingDummyData } from "@/data/onboarding/dummy";
 
 export default function OnboardingFlowPage() {
@@ -12,21 +12,21 @@ export default function OnboardingFlowPage() {
   return (
     <main className="mx-auto max-w-md px-6 py-16">
       <Card>
-        <Card.Header>
-          <Card.Title>Welcome, {data.user.name.split(" ")[0]}</Card.Title>
-          <Card.Description>{data.user.email}</Card.Description>
-        </Card.Header>
-        <Card.Content className="flex flex-col gap-3">
+        <CardHeader>
+          <CardTitle>Welcome, {data.user.name.split(" ")[0]}</CardTitle>
+          <CardDescription>{data.user.email}</CardDescription>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-3">
           {data.steps.map((step) => (
             <div key={step.id} className="flex items-center justify-between">
-              <span className="text-sm text-surface-foreground">{step.label}</span>
+              <span className="text-sm text-foreground">{step.label}</span>
               <StatusBadge status={step.status}>{step.status}</StatusBadge>
             </div>
           ))}
-        </Card.Content>
-        <Card.Footer>
+        </CardContent>
+        <CardFooter>
           <Button>Continue</Button>
-        </Card.Footer>
+        </CardFooter>
       </Card>
     </main>
   );

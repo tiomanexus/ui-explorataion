@@ -1,5 +1,5 @@
 {
-  "name": "@mnx/toolbar",
+  "name": "@ynvrs/toolbar",
   "version": "0.0.0",
   "private": true,
   "main": "./src/index.ts",
@@ -16,7 +16,7 @@
     "typescript": "^5.7.0"
   },
   "dependencies": {
-    "@heroui/react": "^3.2.4",
+    "@ynvrs/ui": "workspace:*",
     "@remixicon/react": "^4.9.0"
   }
 }

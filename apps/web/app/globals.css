@@ -1,5 +1,6 @@
-@import "@heroui/styles";
-@import "@mnx/design-tokens/css";
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "@ynvrs/design-tokens/css";
 
 /*
  * Tailwind v4's automatic content scanning stops at this app's own
