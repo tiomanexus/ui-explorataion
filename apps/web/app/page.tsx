@@ -11,7 +11,7 @@ export default function Home() {
         {flowRegistry.map((flow) => (
           <li key={flow.slug}>
             <Link
-              href={`/${flow.slug}`}
+              href={flow.pages[0]?.href ?? `/${flow.slug}`}
               className="block rounded-lg border border-border bg-card p-4 transition-colors hover:bg-muted"
             >
               <div className="font-medium text-card-foreground">{flow.name}</div>

@@ -2,11 +2,13 @@
 
 import { usePathname } from "next/navigation";
 import { PrototypeChrome } from "@ynvrs/toolbar";
-import { flowRegistry } from "@/flows/registry";
+import { flowRegistry, getFlow } from "@/flows/registry";
 
 export default function FlowsLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const currentSlug = pathname.split("/").filter(Boolean)[0];
+  const segments = pathname.split("/").filter(Boolean);
+  const currentSlug = segments[0];
+  const currentFlow = getFlow(currentSlug ?? "");
   const flows = flowRegistry.map((flow) => ({
     slug: flow.slug,
     name: flow.name,
@@ -14,7 +16,12 @@ export default function FlowsLayout({ children }: { children: React.ReactNode })
   }));
 
   return (
-    <PrototypeChrome flows={flows} currentFlowSlug={currentSlug}>
+    <PrototypeChrome
+      flows={flows}
+      pages={currentFlow?.pages.map((page) => ({ slug: page.slug, name: page.name, href: page.href }))}
+      currentFlowSlug={currentSlug}
+      currentPageHref={pathname}
+    >
       {children}
     </PrototypeChrome>
   );

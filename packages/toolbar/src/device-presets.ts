@@ -20,4 +20,6 @@ export const DEVICE_PRESETS: DevicePreset[] = [
   { id: "iphone-15-pro-max", label: "iPhone 15 Pro Max — 430 × 932", width: 430, height: 932 },
   { id: "iphone-15", label: "iPhone 15 — 393 × 852", width: 393, height: 852 },
   { id: "iphone-se", label: "iPhone SE — 375 × 667", width: 375, height: 667 },
+  // Free-form size controlled by drag handles (like Chrome DevTools' responsive mode).
+  { id: "custom", label: "Custom", width: null, height: null },
 ];
