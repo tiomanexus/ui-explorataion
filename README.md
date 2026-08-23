@@ -1,4 +1,4 @@
-# mnx-dsgn-test
+# Design Workspace
 
 Design-system-driven prototyping workspace: build flows fast on top of a shared
 shadcn/ui-based design system, present them to stakeholders on Vercel.
